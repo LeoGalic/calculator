@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+      * {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #434672;
+  font-family: sans-serif;
+}
+
+
+.calculator {
+  width: 300px;
+  padding-bottom: 15px;
+  border-radius: 7px;
+  background-color: #000;
+  box-shadow: 5px 8px 8px -2px rgba(0, 0, 0, 0.61);
+}
+
+.display {
+  width: 100%;
+  height: 80px;
+  border: none;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 2rem;
+  background-color: #799fc4;
+  color: #000;
+  text-align: right;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  background-color: #222;
+  color: #fff;
+  margin: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+
+.operator {
+  background-color: #9fc6dd;
+  color: #000;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+
+
+    <input type="text" class="display" disabled>
+
+    <div class="keys">
+   
+      <div class="row"> 
+        <button value="7">7</button>
+        <button value="8">8</button>
+        <button value="9">9</button>
+        <button value="+" class="operator">+</button>
+        
+      </div>
+      <div class="row"> 
+        <button value="4">4</button>
+        <button value="5">5</button>
+        <button value="6">6</button>
+        <button value="-" class="operator">-</button>
+      </div>
+
+      <div class="row">  
+        <button value="1">1</button>
+        <button value="2">2</button>
+        <button value="3">3</button>
+        <button value="%" class="operator">%</button>
+       </div>
+
+       <div class="row">
+        <button value="=" class="operator">=</button> 
+        <button value="0">0</button>
+        <button value="C" class="operator">C</button>
+        <button value="π" class="operator">π</button>
+       </div>
+
+
+      <div class="row">
+        <button value="*" class="operator">*</button>
+        <button value="/" class="operator">/</button>
+        <button value="." class="operator">.</button>
+        <button value="log" class="operator">log</button>
+      </div>
+
+      <div class="row">
+        <button value="x^2" class="operator" onclick="square()">x²</button>
+        <button value="sqrt2" class="operator" onclick="sqrt2()">√x</button>
+        <button value="(" class="operator">(</button>
+        <button value=")" class="operator">)</button>
+      </div>
+
+      <div class="row">
+        <button value="sin" class="operator" onclick="sin()">sin</button>
+        <button value="cos" class="operator" onclick="cos()">cos</button>
+        <button value="cot" class="operator" onclick="cot()">ctg</button>
+        <button value="tan" class="operator" onclick="tan()">tg</button>
+      </div>
+
+    </div>
+
+  </div>
+  
+  
+  <script>
+
+const buttons = document.querySelectorAll('button');
+
+const display = document.querySelector('.display');
+
+
+// button event kada se klikne da izračuna
+buttons.forEach(function(button) {
+  button.addEventListener('click', calculate);
+});
+
+// izračunavajne event
+function calculate(event) {
+ 
+  const clickedButtonValue = event.target.value;
+
+  if (clickedButtonValue === '=') {        //kada se klikne = da se izračuna i rezultat pokaže
+   
+    if (display.value !== '') {
+      
+      display.value = eval(display.value);
+    }
+  } else if (clickedButtonValue === 'C') {           // kada se kilikne C da se sve izbriše
+    
+    display.value = '';
+  } else {
+  
+    display.value += clickedButtonValue;
+  }
+}
+function sin(){
+  document.calculator.results.value = Math.sin(document.calculator.results.value);
+}
+function cos(){
+  document.calculator.results.value = Math.cos(document.calculator.results.value);
+}
+function cot(){
+  document.calculator.results.value = Math.cot(document.calculator.results.value);
+}
+function tan(){
+  document.calculator.results.value = Math.tan(document.calculator.results.value);
+}
+function square(){
+  document.calculator.results.value = Math.pow(document.calculator.results.value, 2);
+}
+function sqrt2(){
+  document.calculator.results.value = Math.sqrt(document.calculator.results.value, 1/2);
+}
+  </script>
+</body>
+</html>
