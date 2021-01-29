@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculator</title>
   <style>
-      * {
+          * {
   padding: 0;
   margin: 0;
 }
@@ -30,12 +29,12 @@ body {
   box-shadow: 5px 8px 8px -2px rgba(0, 0, 0, 0.61);
 }
 
-.display {
+#display {
   width: 100%;
   height: 80px;
   border: none;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 50px;
   font-size: 2rem;
   background-color: #799fc4;
   color: #000;
@@ -52,7 +51,7 @@ body {
 
 
 
-button {
+.btnTop {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -67,127 +66,179 @@ button {
 button:hover {
   cursor: pointer;
 }
-
-
-.operator {
-  background-color: #9fc6dd;
-  color: #000;
+.btnNum {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  background-color: #222;
+  color: #fff;
+  margin: 10px;
 }
 
+.btnMath {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  background-color: rgb(88, 125, 226);
+  color: rgb(36, 36, 36);
+  margin: 10px;
+}
+.btnOpps {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  background-color: rgb(88, 125, 226);
+  color: rgb(36, 36, 36);
+  margin: 10px;
+}
+.fBtn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  background-color: rgb(11, 26, 66);
+  color: rgb(255, 234, 234);
+  margin: 10px;
+}
   </style>
 </head>
 <body>
 
-  <div class="calculator">
+  <form name="calculator">
+   <table class="calculator" cellspacing="0" cellpadding="1">
+     <tr>
+       <td colspan="5"><input id="display" name="display" value="0" ></td>
+     </tr>
+     <tr>
+       <td><input type="button" class="fBtn" name="btnTop" value="𝗖" onclick="this.form.display.value=  0 "></td>
+       <td><input type="button" class="fBtn" name="btnTop" value="🡸" onclick="deleteChar(this.form.display)"></td>
+       <td><input type="button" class="fBtn" name="btnTop" value="=" onclick="if(checkNum(this.form.display.value)) { compute(this.form) }"></td>
+       <td><input type="button" class="btnOpps" name="btnOpps" value="&#960;" onclick="addChar(this.form.display,'3.14159265359')"></td>
+       <td><input type="button" class="btnMath" name="btnMath" value="%" onclick=" percent(this.form.display)"></td>
+     </tr>
+     <tr>
+       <td><input type="button" class="btnNum" name="btnNum" value="7" onclick="addChar(this.form.display, '7')"></td>
+       <td><input type="button" class="btnNum" name="btnNum" value="8" onclick="addChar(this.form.display, '8')"></td>
+       <td><input type="button" class="btnNum" name="btnNum" value="9" onclick="addChar(this.form.display, '9')"></td>
+       <td><input type="button" class="btnOpps" name="btnOpps" value="x&#94;" onclick="if(checkNum(this.form.display.value)) { exp(this.form) }"></td>
+       <td><input type="button" class="btnMath" name="btnMath" value="/" onclick="addChar(this.form.display, '/')"></td>
+     <tr>
+       <td><input type="button" class="btnNum" name="btnNum" value="4" onclick="addChar(this.form.display, '4')"></td>
+       <td><input type="button" class="btnNum" name="btnNum" value="5" onclick="addChar(this.form.display, '5')"></td>
+       <td><input type="button" class="btnNum" name="btnNum" value="6" onclick="addChar(this.form.display, '6')"></td>
+       <td><input type="button" class="btnOpps" name="btnOpps" value="Log" onclick="if(checkNum(this.form.display.value)) { ln(this.form) }"></td>
+       <td><input type="button" class="btnMath" name="btnMath" value="*" onclick="addChar(this.form.display, '*')"></td>
+     </tr>
+     <tr>
+       <td><input type="button" class="btnNum" name="btnNum" value="1" onclick="addChar(this.form.display, '1')"></td>
+       <td><input type="button" class="btnNum" name="btnNum" value="2" onclick="addChar(this.form.display, '2')"></td>
+       <td><input type="button" class="btnNum" name="btnNum" value="3" onclick="addChar(this.form.display, '3')"></td>
+       <td><input type="button" class="btnOpps" name="btnOpps" value="√x" onclick="if(checkNum(this.form.display.value)) { sqrt(this.form) }"></td>
+       <td><input type="button" class="btnMath" name="btnMath" value="-" onclick="addChar(this.form.display, '-')"></td>
+     </tr>
+     <tr>
+       <td><input type="button" class="btnMath" name="btnMath" value="&#177" onclick="changeSign(this.form.display)"></td>
+       <td><input type="button" class="btnNum" name="btnNum" value="0" onclick="addChar(this.form.display, '0')"></td>
+       <td><input type="button" class="btnMath" name="btnMath" value="&#46;" onclick="addChar(this.form.display, '&#46;')"></td>
+       <td><input type="button" class="btnOpps" name="btnOpps" value="x²" onclick="if(checkNum(this.form.display.value)) { square(this.form) }"></td>
+       <td><input type="button" class="btnMath" name="btnMath" value="+" onclick="addChar(this.form.display, '+')"></td>
+     </tr>
+     <tr>
+       <td><input type="button" class="btnMath" name="btnMath" value="(" onclick="addChar(this.form.display, '(')"></td>
+       <td><input type="button" class="btnMath" name="btnMath" value=")" onclick="addChar(this.form.display,')')"></td>
+       <td><input type="button" class="btnMath" name="btnMath" value="cos" onclick="if(checkNum(this.form.display.value)) { cos(this.form) }"></td>
+       <td><input type="button" class="btnMath" name="btnMath" value="sin" onclick="if(checkNum(this.form.display.value)) { sin(this.form) }"></td>
+       <td><input type="button" class="btnMath" name="btnMath" value="tan" onclick="if(checkNum(this.form.display.value)) { tan(this.form) }"></td>
+    </tr>
+   </tabel>
+  </form>
+       
+       
 
 
-    <input type="text" class="display" disabled>
 
-    <div class="keys">
-   
-      <div class="row"> 
-        <button value="7">7</button>
-        <button value="8">8</button>
-        <button value="9">9</button>
-        <button value="+" class="operator">+</button>
-        
-      </div>
-      <div class="row"> 
-        <button value="4">4</button>
-        <button value="5">5</button>
-        <button value="6">6</button>
-        <button value="-" class="operator">-</button>
-      </div>
-
-      <div class="row">  
-        <button value="1">1</button>
-        <button value="2">2</button>
-        <button value="3">3</button>
-        <button value="%" class="operator">%</button>
-       </div>
-
-       <div class="row">
-        <button value="=" class="operator">=</button> 
-        <button value="0">0</button>
-        <button value="C" class="operator">C</button>
-        <button value="π" class="operator">π</button>
-       </div>
-
-
-      <div class="row">
-        <button value="*" class="operator">*</button>
-        <button value="/" class="operator">/</button>
-        <button value="." class="operator">.</button>
-        <button value="log" class="operator">log</button>
-      </div>
-
-      <div class="row">
-        <button value="x^2" class="operator" onclick="square()">x²</button>
-        <button value="sqrt2" class="operator" onclick="sqrt2()">√x</button>
-        <button value="(" class="operator">(</button>
-        <button value=")" class="operator">)</button>
-      </div>
-
-      <div class="row">
-        <button value="sin" class="operator" onclick="sin()">sin</button>
-        <button value="cos" class="operator" onclick="cos()">cos</button>
-        <button value="cot" class="operator" onclick="cot()">ctg</button>
-        <button value="tan" class="operator" onclick="tan()">tg</button>
-      </div>
-
-    </div>
-
-  </div>
   
   
   <script>
+    function addChar(input, character) {
+	if(input.value == null || input.value == "0")  // funkcija za dodavanje brojeva kad se kilkne button u display
+		input.value = character
+	else
+		input.value += character
+}
 
-const buttons = document.querySelectorAll('button');
+function cos(form) {
+	form.display.value = Math.cos(form.display.value);  // funkcija za cosinus
+}
 
-const display = document.querySelector('.display');
+function sin(form) {
+	form.display.value = Math.sin(form.display.value); // funkcija za sinus
+}
 
+function tan(form) {
+	form.display.value = Math.tan(form.display.value);  // funkcija za tanges
+}
 
-// button event kada se klikne da izračuna
-buttons.forEach(function(button) {
-  button.addEventListener('click', calculate);
-});
+function sqrt(form) {
+	form.display.value = Math.sqrt(form.display.value); // funkcija za sinus krijen
+}
 
-// izračunavajne event
-function calculate(event) {
- 
-  const clickedButtonValue = event.target.value;
+function ln(form) {
+	form.display.value = Math.log(form.display.value); // funkcija za sinus logoritam
+}
 
-  if (clickedButtonValue === '=') {        //kada se klikne = da se izračuna i rezultat pokaže
-   
-    if (display.value !== '') {
-      
-      display.value = eval(display.value);
-    }
-  } else if (clickedButtonValue === 'C') {           // kada se kilikne C da se sve izbriše
-    
-    display.value = '';
-  } else {
-  
-    display.value += clickedButtonValue;
+function exp(form) {
+	form.display.value = Math.exp(form.display.value); // funkcija za eksponenta
+}
+
+function deleteChar(input) {
+	input.value = input.value.substring(0, input.value.length - 1) // da se izbrise broj 
+}
+var val = 0.0;
+function percent(input) {
+  val = input.value;                // funkcija za postotak 
+  input.value = input.value + "%";
+}
+
+function changeSign(input) {
+	if(input.value.substring(0, 1) == "-")                            // funkcija da se promjeni predznak ako je broj negativan
+		input.value = input.value.substring(1, input.value.length)
+	else
+		input.value = "-" + input.value
+}
+
+function compute(form) {
+    form.display.value = eval(form.display.value);   // da se izracuna 
   }
+
+
+function square(form) {
+	form.display.value = eval(form.display.value) * eval(form.display.value)   // funkcija za kvadrat
 }
-function sin(){
-  document.calculator.results.value = Math.sin(document.calculator.results.value);
-}
-function cos(){
-  document.calculator.results.value = Math.cos(document.calculator.results.value);
-}
-function cot(){
-  document.calculator.results.value = Math.cot(document.calculator.results.value);
-}
-function tan(){
-  document.calculator.results.value = Math.tan(document.calculator.results.value);
-}
-function square(){
-  document.calculator.results.value = Math.pow(document.calculator.results.value, 2);
-}
-function sqrt2(){
-  document.calculator.results.value = Math.sqrt(document.calculator.results.value, 1/2);
+
+function checkNum(str) {
+	for (var i = 0; i < str.length; i++) {
+		var ch = str.charAt(i);
+		if (ch < "0" || ch > "9") {
+			if (ch != "/" && ch != "*" && ch != "+" && ch != "-" && ch != "."   // da se provjeri broj,da se moze izracunat ako ne pokaziva invalid enetry
+				&& ch != "(" && ch!= ")" && ch != "%") {
+				alert("invalid entry!")
+				return false
+				}
+			}
+		}
+		return true
 }
   </script>
 </body>
